@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MentalGuard - Platform kesehatan mental untuk melawan kecanduan judi online">
+  <title>MentalGuard - Jaga Mentalmu, Lawan Judi Online</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header dengan Navigasi -->
+  <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-brain text-2xl"></i>
+        <h1 class="text-2xl font-bold">Mental<span class="text-yellow-300">Guard</span></h1>
+      </div>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-8">
+          <li><a href="#chatbot" class="hover:text-yellow-300 transition">Konsultasi</a></li>
+          <li><a href="#tracker" class="hover:text-yellow-300 transition">Mood Tracker</a></li>
+          <li><a href="#resources" class="hover:text-yellow-300 transition">Sumber Daya</a></li>
+          <li><a href="#about" class="hover:text-yellow-300 transition">Tentang</a></li>
+        </ul>
+      </nav>
+      <button id="mobile-menu-button" class="md:hidden text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-blue-700 pb-4 px-4">
+      <ul class="space-y-2">
+        <li><a href="#chatbot" class="block py-2 hover:text-yellow-300 transition">Konsultasi</a></li>
+        <li><a href="#tracker" class="block py-2 hover:text-yellow-300 transition">Mood Tracker</a></li>
+        <li><a href="#resources" class="block py-2 hover:text-yellow-300 transition">Sumber Daya</a></li>
+        <li><a href="#about" class="block py-2 hover:text-yellow-300 transition">Tentang</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-blue-600 to-blue-500 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Jaga Kesehatan Mentalmu</h1>
+      <h2 class="text-xl md:text-2xl mb-8">Lawan Kecanduan Judi Online</h2>
+      <p class="max-w-2xl mx-auto mb-8">MentalGuard hadir sebagai teman digital untuk membantumu mengatasi stres, kecemasan, dan kecanduan judi online melalui pendekatan psikologis modern.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#chatbot" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-6 rounded-full transition transform hover:scale-105 shadow-lg">
+          Mulai Konsultasi <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+        <a href="#resources" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-full transition transform hover:scale-105 shadow-lg">
+          Pelajari Lebih Lanjut
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto mt-10 px-4 space-y-10 pb-16">
+    <!-- Stats Section -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-blue-600 text-4xl mb-3">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">10.000+ Pengguna</h3>
+        <p class="text-gray-600">Telah bergabung dengan komunitas MentalGuard</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-green-600 text-4xl mb-3">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">85% Peningkatan</h3>
+        <p class="text-gray-600">Kontrol diri terhadap keinginan berjudi</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-purple-600 text-4xl mb-3">
+          <i class="fas fa-headset"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">24/7 Dukungan</h3>
+        <p class="text-gray-600">Konsultasi dengan AI dan tenaga ahli</p>
+      </div>
+    </section>
+
+    <!-- Chatbot AI -->
+    <section id="chatbot" class="bg-white p-6 rounded-xl shadow-md">
+      <div class="flex items-center mb-4">
+        <div class="bg-blue-100 p-2 rounded-full mr-3">
+          <i class="fas fa-robot text-blue-600 text-xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold">Konsultasi Cepat dengan AI</h2>
+      </div>
+      
+      <div class="mb-4">
+        <div class="progress-bar">
+          <div id="typing-indicator" class="progress-fill w-0"></div>
+        </div>
+      </div>
+      
+      <div id="chat-log" class="min-h-[300px] max-h-[400px] mb-4 bg-gray-50 p-4 rounded-lg overflow-y-auto flex flex-col space-y-2">
+        <div class="chat-bubble bot-bubble">
+          <p>Halo! Saya Asisten MentalGuard. Saya di sini untuk mendengarkan dan membantumu. Bagaimana perasaanmu hari ini?</p>
+        </div>
+      </div>
+      
+      <div class="flex space-x-2">
+        <input
+          type="text"
+          id="user-input"
+          class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+          placeholder="Ceritakan perasaanmu hari ini..."
+          autocomplete="off"
+        />
+        <button
+          onclick="handleChat()"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg transition flex items-center"
+          id="send-button"
+        >
+          <span id="button-text">Kirim</span>
+          <i class="fas fa-paper-plane ml-2"></i>
+        </button>
+      </div>
+      
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button onclick="quickResponse('Saya merasa sangat stres hari ini')" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded-full transition">
+          <i class="fas fa-bolt mr-1"></i> Stres
+        </button>
+        <button onclick="quickResponse('Saya kecanduan judi dan ingin berhenti')" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded-full transition">
+          <i class="fas fa-bolt mr-1"></i> Kecanduan
+        </button>
+        <button onclick="quickResponse('Saya merasa sedih dan kehilangan semangat')" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded-full transition">
+          <i class="fas fa-bolt mr-1"></i> Sedih
+        </button>
+        <button onclick="quickResponse('Saya butuh bantuan untuk mengatasi kecemasan')" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded-full transition">
+          <i class="fas fa-bolt mr-1"></i> Cemas
+        </button>
+      </div>
+    </section>
+
+    <!-- Mood Tracker -->
+    <section id="tracker" class="bg-white p-6 rounded-xl shadow-md">
+      <div class="flex items-center mb-4">
+        <div class="bg-green-100 p-2 rounded-full mr-3">
+          <i class="fas fa-chart-line text-green-600 text-xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold">Pantau Mood Harian</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="mb-4">
+            <label for="mood-select" class="block text-sm font-medium text-gray-700 mb-1">Pilih Mood Hari Ini</label>
+            <select id="mood-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+              <option value="">-- Pilih Mood --</option>
+              <option value="happy">😊 Bahagia</option>
+              <option value="sad">😢 Sedih</option>
+              <option value="angry">😠 Marah</option>
+              <option value="neutral">😐 Biasa saja</option>
+              <option value="anxious">😰 Cemas/Gelisah</option>
+            </select>
+          </div>
+          
+          <div class="mb-4">
+            <label for="mood-notes" class="block text-sm font-medium text-gray-700 mb-1">Catatan (opsional)</label>
+            <textarea id="mood-notes" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition" placeholder="Apa yang membuatmu merasa seperti ini?"></textarea>
+          </div>
+          
+          <button
+            onclick="saveMood()"
+            class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition flex items-center justify-center"
+          >
+            <i class="fas fa-save mr-2"></i> Simpan Mood Hari Ini
+          </button>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-3">Riwayat Mood 7 Hari Terakhir</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <canvas id="moodChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="text-lg font-semibold mb-3">Riwayat Mood</h3>
+        <div id="mood-list" class="space-y-2"></div>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="bg-white p-6 rounded-xl shadow-md">
+      <div class="flex items-center mb-4">
+        <div class="bg-purple-100 p-2 rounded-full mr-3">
+          <i class="fas fa-book-open text-purple-600 text-xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold">Sumber Daya & Edukasi</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+          <div class="bg-blue-100 p-4">
+            <i class="fas fa-exclamation-triangle text-blue-600 text-2xl"></i>
+            <h3 class="font-bold text-lg mt-2">Bahaya Judi Online</h3>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600 mb-3">Judi online bisa menyebabkan kecanduan, stres berat, masalah keuangan, bahkan merusak hubungan sosial dan keluarga.</p>
+            <button onclick="showArticle('gambling')" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+              Baca selengkapnya <i class="fas fa-chevron-right ml-1 text-sm"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+          <div class="bg-green-100 p-4">
+            <i class="fas fa-brain text-green-600 text-2xl"></i>
+            <h3 class="font-bold text-lg mt-2">Tips Kesehatan Mental</h3>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600 mb-3">Pelajari teknik-teknik sederhana untuk mengelola stres, kecemasan, dan emosi negatif dalam kehidupan sehari-hari.</p>
+            <button onclick="showArticle('mental-health')" class="text-green-600 hover:text-green-800 font-medium flex items-center">
+              Baca selengkapnya <i class="fas fa-chevron-right ml-1 text-sm"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+          <div class="bg-yellow-100 p-4">
+            <i class="fas fa-hands-helping text-yellow-600 text-2xl"></i>
+            <h3 class="font-bold text-lg mt-2">Layanan Bantuan</h3>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600 mb-3">Daftar layanan profesional dan komunitas yang bisa membantu mengatasi kecanduan judi dan masalah mental.</p>
+            <button onclick="showArticle('help')" class="text-yellow-600 hover:text-yellow-800 font-medium flex items-center">
+              Baca selengkapnya <i class="fas fa-chevron-right ml-1 text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="bg-white p-6 rounded-xl shadow-md">
+      <div class="flex items-center mb-4">
+        <div class="bg-pink-100 p-2 rounded-full mr-3">
+          <i class="fas fa-quote-left text-pink-600 text-xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold">Kisah Sukses</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center mr-3">
+              <i class="fas fa-user text-blue-600"></i>
+            </div>
+            <div>
+              <h4 class="font-bold">Andi, 28 tahun</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-700 italic">"MentalGuard membantu saya menyadari bahwa judi online adalah pelarian dari masalah saya. Dengan mood tracker dan konseling AI, saya belajar mengelola emosi dan sekarang sudah 6 bulan bebas judi!"</p>
+        </div>
+        
+        <div class="bg-green-50 p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-green-200 flex items-center justify-center mr-3">
+              <i class="fas fa-user text-green-600"></i>
+            </div>
+            <div>
+              <h4 class="font-bold">Rina, 32 tahun</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-700 italic">"Suami saya kecanduan judi online sampai menghabiskan tabungan. Artikel di MentalGuard memberi saya kekuatan untuk mencari bantuan profesional. Sekarang kondisi keluarga kami jauh lebih baik."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-white p-6 rounded-xl shadow-md">
+      <div class="flex items-center mb-4">
+        <div class="bg-red-100 p-2 rounded-full mr-3">
+          <i class="fas fa-info-circle text-red-600 text-xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold">Tentang MentalGuard</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-3">Misi Kami</h3>
+          <p class="text-gray-700 mb-4">MentalGuard didirikan pada tahun 2023 sebagai respons terhadap meningkatnya kasus gangguan mental dan kecanduan judi online di Indonesia, terutama di kalangan remaja dan dewasa muda.</p>
+          <p class="text-gray-700">Kami berkomitmen untuk menyediakan alat dan sumber daya yang mudah diakses untuk membantu masyarakat menjaga kesehatan mental dan terhindar dari jerat judi online.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-semibold mb-3">Tim Ahli Kami</h3>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="bg-blue-100 p-2 rounded-full mr-3">
+                <i class="fas fa-user-md text-blue-600"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Dr. Siti Rahayu, M.Psi</h4>
+                <p class="text-gray-600 text-sm">Psikolog Klinis Spesialis Kecanduan</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-green-100 p-2 rounded-full mr-3">
+                <i class="fas fa-laptop-code text-green-600"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Budi Santoso, S.Kom</h4>
+                <p class="text-gray-600 text-sm">AI Developer & Pendiri MentalGuard</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-purple-100 p-2 rounded-full mr-3">
+                <i class="fas fa-hands-helping text-purple-600"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Tim Konselor</h4>
+                <p class="text-gray-600 text-sm">Tenaga profesional siap membantu 24/7</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="article-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 id="modal-title" class="text-2xl font-bold"></h3>
+          <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div id="modal-content" class="prose prose-blue max-w-none"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <i class="fas fa-brain text-2xl mr-2 text-blue-300"></i>
+            <h3 class="text-xl font-bold">Mental<span class="text-yellow-300">Guard</span></h3>
+          </div>
+          <p class="text-gray-400">Platform kesehatan mental untuk melawan kecanduan judi online dan meningkatkan kualitas hidup.</p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
+          <ul class="space-y-2">
+            <li><a href="#chatbot" class="text-gray-400 hover:text-white transition">Konsultasi AI</a></li>
+            <li><a href="#tracker" class="text-gray-400 hover:text-white transition">Mood Tracker</a></li>
+            <li><a href="#resources" class="text-gray-400 hover:text-white transition">Sumber Daya</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <i class="fas fa-envelope text-gray-400 mr-2"></i>
+              <span class="text-gray-400">hello@mentalguard.id</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone text-gray-400 mr-2"></i>
+              <span class="text-gray-400">+62 21 1234 5678</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+              <span class="text-gray-400">Jakarta, Indonesia</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Media Sosial</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-400 transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-pink-600 transition">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+          
+          <div class="mt-6">
+            <h4 class="text-lg font-semibold mb-2">Unduh Aplikasi</h4>
+            <div class="flex space-x-2">
+              <a href="#" class="bg-black text-white px-3 py-2 rounded flex items-center text-sm">
+                <i class="fab fa-apple mr-2"></i> App Store
+              </a>
+              <a href="#" class="bg-black text-white px-3 py-2 rounded flex items-center text-sm">
+                <i class="fab fa-google-play mr-2"></i> Play Store
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 MentalGuard. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

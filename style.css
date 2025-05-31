@@ -1,0 +1,60 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s ease;
+    }
+    
+    .mood-happy { background-color: #fef3c7; }
+    .mood-sad { background-color: #dbeafe; }
+    .mood-angry { background-color: #fee2e2; }
+    .mood-neutral { background-color: #e5e7eb; }
+    .mood-anxious { background-color: #ede9fe; }
+    
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .user-bubble {
+      background-color: #3b82f6;
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 0.25rem;
+    }
+    
+    .bot-bubble {
+      background-color: #f3f4f6;
+      color: #1f2937;
+      margin-right: auto;
+      border-bottom-left-radius: 0.25rem;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .progress-bar {
+      height: 6px;
+      border-radius: 3px;
+      background-color: #e5e7eb;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: #3b82f6;
+      transition: width 0.5s ease;
+    }
+    
+    #moodChart {
+      max-height: 300px;
+    }
