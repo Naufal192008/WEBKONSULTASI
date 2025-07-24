@@ -1,5 +1,4 @@
- // Mobile Menu Toggle
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+document.getElementById('mobile-menu-button').addEventListener('click', function() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
     });
@@ -27,75 +26,270 @@
       });
     });
 
-    // Chatbot Functionality
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
+  // Enhanced Chatbot Functionality
+const chatLog = document.getElementById('chat-log');
+const userInput = document.getElementById('user-input');
+
+// More comprehensive responses for the chatbot
+const botResponses = {
+  greetings: [
+    "Halo! Saya BOFAL, asisten digital MentalGuard. Saya di sini untuk mendukung perjalananmu menuju kesehatan mental yang lebih baik. Bagaimana perasaanmu hari ini?",
+    "Hai! Senang bertemu denganmu. Saya siap mendengarkan ceritamu tentang apa saja yang mengganggu pikiranmu.",
+    "Selamat datang di MentalGuard! Sebelum kita mulai, bagaimana kabarmu hari ini? (Kamu bisa jawab dengan jujur, ini ruang yang aman)"
+  ],
+  stress: [
+    "Stres bisa terasa berat, tapi kamu tidak sendirian. Mari kita pecahkan ini bersama. Bisakah kamu ceritakan lebih detail apa yang membuatmu stres?",
+    "Saya mendengar bahwa kamu sedang stres. Pernahkah kamu mencoba teknik pernapasan 4-7-8? Tarik napas 4 detik, tahan 7 detik, buang 8 detik. Mau saya pandu melakukannya sekarang?",
+    "Stres yang kamu rasakan valid. Sebelum kita lanjut, saya ingin kamu tahu: kamu lebih kuat dari yang kamu kira. Apa ada situasi spesifik yang ingin kamu bahas?"
+  ],
+  gambling: {
+    initial: [
+      "Mengakui bahwa ada masalah dengan judi adalah langkah sangat berani. Saya bangga padamu. Bisakah kamu ceritakan kapan terakhir kali kamu berjudi dan apa yang memicunya?",
+      "Kecanduan judi bisa sangat menantang, tapi pemulihan itu mungkin. Berapa lama kamu sudah berjuang dengan ini?",
+      "Saya di sini untuk mendukungmu. Bisa ceritakan bagaimana judi online mempengaruhi hidupmu sehari-hari?"
+    ],
+    urge: [
+      "Keinginan berjudi biasanya datang seperti gelombang - intens tapi sementara. Coba tahan 15 menit lagi dengan melakukan aktivitas lain. Apa yang bisa kamu lakukan selama 15 menit ini?",
+      "Ketika keinginan berjudi muncul, ingatlah alasan utama kamu ingin berhenti. Mau kita buat daftar alasan itu bersama sekarang?",
+      "Keinginan berjudi akan berlalu. Sementara ini, coba minum segelas air dingin dan tarik napas dalam. Mau saya pandu latihan pernapasan singkat?"
+    ],
+    relapse: [
+      "Kambuh adalah bagian dari proses pemulihan, bukan kegagalan. Apa yang bisa kamu pelajari dari pengalaman ini?",
+      "Jangan terlalu keras pada dirimu sendiri. Mari kita evaluasi apa yang memicu kekambuhan ini dan buat strategi untuk berikutnya.",
+      "Setiap hari adalah kesempatan baru. Apa satu hal kecil yang bisa kamu lakukan hari ini untuk kembali ke jalur pemulihan?"
+    ]
+  },
+  sad: [
+    "Saya turut merasakan kesedihanmu. Terkadang kita memang perlu merasakan emosi ini. Apakah ada yang ingin kamu ceritakan lebih lanjut?",
+    "Kesedihan bisa terasa menyakitkan, tapi ingatlah bahwa perasaan ini tidak permanen. Apa yang biasanya membantumu saat merasa seperti ini?",
+    "Saya di sini untuk mendengarkan. Kamu tidak sendirian dalam perasaan ini. Bisakah kamu gambarkan seperti apa kesedihan yang kamu rasakan?"
+  ],
+  anxious: [
+    "Kecemasan bisa terasa menakutkan, tapi kamu aman sekarang. Coba sebutkan 3 benda yang bisa kamu lihat di sekitarmu. Ini bisa membantu membawamu kembali ke saat ini.",
+    "Ketika cemas, tubuh kita bereaksi seolah ada bahaya. Tapi kamu kuat. Mau kita coba teknik grounding bersama? Sebutkan: 5 hal yang kamu lihat, 4 yang bisa kamu sentuh, 3 yang bisa kamu dengar, 2 yang bisa kamu cium, 1 yang bisa kamu rasakan.",
+    "Kecemasan adalah pembohong yang meyakinkan. Apa yang sebenarnya terjadi vs apa yang dikatakan kecemasanmu padamu?"
+  ],
+  default: [
+    "Saya mencoba memahami apa yang kamu rasakan. Bisakah kamu menjelaskannya dengan cara lain?",
+    "Terima kasih telah berbagi. Saya ingin memastikan saya paham - bisa kamu jelaskan lebih detail?",
+    "Setiap pengalaman itu unik. Saya di sini untuk mendengarkan ceritamu lebih lanjut."
+  ],
+  resources: [
+    "MentalGuard punya beberapa alat yang mungkin membantumu:\n1. Mood Tracker untuk pantau emosi harian\n2. Artikel tentang mengatasi kecanduan\n3. Teknik relaksasi\nMau tahu lebih banyak tentang yang mana?",
+    "Ada beberapa teknik yang bisa kita coba sekarang:\n- Latihan pernapasan\n- Pemetaan pemicu judi\n- Membuat daftar kegiatan pengganti\nKamu tertarik mencoba yang mana?",
+    "Saya bisa membantumu menemukan:\n✔ Layanan profesional terdekat\n✔ Grup dukungan online\n✔ Strategi mengatasi keinginan berjudi\nApa yang paling kamu butuhkan sekarang?"
+  ]
+};
+
+// Track conversation context
+let conversationContext = {
+  lastTopic: null,
+  userName: null,
+  gamblingStatus: null,
+  lastResponseType: null
+};
+
+// Function to add a message to the chat log with improved formatting
+function addMessage(sender, message) {
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('chat-bubble', 'rounded-lg', 'p-4', 'max-w-[80%]', 'my-2');
+  
+  if (sender === 'user') {
+    messageDiv.classList.add('bg-blue-100', 'self-end', 'rounded-br-none');
+    messageDiv.innerHTML = `
+      <p class="text-gray-800">${message}</p>
+      <p class="text-xs text-gray-500 text-right mt-1">Anda</p>
+    `;
+  } else {
+    messageDiv.classList.add('bg-gray-100', 'self-start', 'rounded-bl-none');
+    messageDiv.innerHTML = `
+      <div class="flex items-start mb-1">
+        <span class="font-bold text-blue-600 mr-2">BOFAL:</span>
+        <p class="text-gray-800">${message}</p>
+      </div>
+      <p class="text-xs text-gray-500">Asisten MentalGuard</p>
+    `;
+  }
+  
+  chatLog.appendChild(messageDiv);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+// Improved typing simulation with better visual feedback
+function simulateTyping(callback) {
+  const typingIndicator = document.getElementById('typing-indicator');
+  typingIndicator.style.width = '0%';
+  typingIndicator.classList.remove('hidden');
+  
+  let width = 0;
+  const interval = setInterval(() => {
+    width += 5 + Math.random() * 15; // Variable speed for more natural feel
+    if (width > 100) width = 100;
+    typingIndicator.style.width = `${width}%`;
     
-    // Sample responses for the chatbot
-    const botResponses = {
-      greetings: [
-        "Halo! Saya senang Anda ada di sini. Bagaimana kabarmu hari ini?",
-        "Hai! Saya Asisten MentalGuard. Ada yang bisa saya bantu?",
-        "Selamat datang! Saya di sini untuk mendengarkan. Ceritakan apa yang kamu rasakan."
-      ],
-      stress: [
-        "Stres adalah reaksi normal terhadap tekanan. Coba tarik napas dalam selama 5 detik, tahan 5 detik, lalu buang selama 5 detik. Ulangi beberapa kali.",
-        "Ketika stres, coba lakukan aktivitas fisik ringan seperti berjalan kaki selama 10 menit. Ini bisa membantu mengurangi ketegangan.",
-        "Stres yang berkelanjutan bisa berdampak buruk. Apakah ada situasi khusus yang membuatmu merasa stres saat ini?"
-      ],
-      gambling: [
-        "Mengakui bahwa Anda memiliki masalah dengan judi adalah langkah pertama yang sangat berani. Mari kita bicarakan lebih lanjut.",
-        "Kecanduan judi bisa sangat merusak. Apakah kamu sudah mencoba mencari bantuan profesional sebelumnya?",
-        "Banyak orang berhasil mengatasi kecanduan judi. Salah satu strateginya adalah mengidentifikasi pemicu dan menghindarinya."
-      ],
-      sad: [
-        "Saya turut bersedih mendengarnya. Ingatlah bahwa perasaan sedih itu wajar dan bersifat sementara.",
-        "Ketika merasa sedih, cobalah untuk tidak mengisolasi diri. Berbicara dengan orang terdekat bisa sangat membantu.",
-        "Kesedihan yang berlangsung lebih dari 2 minggu mungkin perlu diperhatikan lebih serius. Apakah kamu punya dukungan dari orang sekitar?"
-      ],
-      anxious: [
-        "Kecemasan bisa terasa sangat menyiksa. Coba fokus pada pernapasan dan ingatkan diri bahwa ini akan berlalu.",
-        "Apa yang kamu rasakan saat ini adalah respons alami tubuh. Coba buat daftar hal-hal yang bisa kamu kendalikan saat ini.",
-        "Kecemasan seringkali tentang masa depan. Coba latih diri untuk fokus pada saat ini, misalnya dengan memperhatikan detil sekitar kamu."
-      ],
-      default: [
-        "Saya mengerti. Bisa kamu ceritakan lebih detail?",
-        "Terima kasih telah berbagi. Apa yang kamu harapkan dari pembicaraan ini?",
-        "Saya mendengarkan. Apa ada hal lain yang ingin kamu sampaikan?"
-      ]
-    };
-
-    // Function to add a message to the chat log
-    function addMessage(sender, message) {
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('chat-bubble');
-      messageDiv.classList.add(sender === 'user' ? 'user-bubble' : 'bot-bubble');
-      
-      const messageContent = document.createElement('p');
-      messageContent.textContent = message;
-      messageDiv.appendChild(messageContent);
-      
-      chatLog.appendChild(messageDiv);
-      chatLog.scrollTop = chatLog.scrollHeight;
+    if (width >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        typingIndicator.style.width = '0%';
+        typingIndicator.classList.add('hidden');
+        callback();
+      }, 200);
     }
+  }, 100);
+}
 
-    // Function to simulate typing animation
-    function simulateTyping(callback) {
-      const typingIndicator = document.getElementById('typing-indicator');
-      typingIndicator.style.width = '0%';
+// Enhanced response handling with context awareness
+function generateResponse(message) {
+  message = message.toLowerCase();
+  
+  // Check for greetings
+  if (/(halo|hai|hi|selamat|pagi|siang|sore|malam)/i.test(message) && !conversationContext.lastTopic) {
+    conversationContext.lastTopic = 'greetings';
+    return getRandomResponse('greetings');
+  }
+  
+  // Check for gambling-related topics
+  if (/(judi|gambling|taruhan|slot|judi online|kecanduan|kambuh|relaps)/i.test(message)) {
+    if (/(ingin|pengen|pengin|mau|keinginan|ingin|craving)/i.test(message)) {
+      conversationContext.lastTopic = 'gambling:urge';
+      return getRandomResponse('gambling.urge');
+    } else if (/(kambuh|relaps|gagal|kembali)/i.test(message)) {
+      conversationContext.lastTopic = 'gambling:relapse';
+      return getRandomResponse('gambling.relapse');
+    } else {
+      conversationContext.lastTopic = 'gambling:initial';
+      return getRandomResponse('gambling.initial');
+    }
+  }
+  
+  // Check for emotional states
+  if (/(stres|tekanan|beban|pusing|penat)/i.test(message)) {
+    conversationContext.lastTopic = 'stress';
+    return getRandomResponse('stress');
+  }
+  
+  if (/(sedih|murung|putus asa|down|tertekan)/i.test(message)) {
+    conversationContext.lastTopic = 'sad';
+    return getRandomResponse('sad');
+  }
+  
+  if (/(cemas|gelisah|khawatir|takut|panik)/i.test(message)) {
+    conversationContext.lastTopic = 'anxious';
+    return getRandomResponse('anxious');
+  }
+  
+  // Check for resource requests
+  if (/(bantuan|tolong|sumber|resource|alat|tool|tips|saran)/i.test(message)) {
+    conversationContext.lastTopic = 'resources';
+    return getRandomResponse('resources');
+  }
+  
+  // If no specific topic detected, continue current context or use default
+  if (conversationContext.lastTopic) {
+    const [category, subcategory] = conversationContext.lastTopic.split(':');
+    if (subcategory && botResponses[category]?.[subcategory]) {
+      return getRandomResponse(`${category}.${subcategory}`);
+    } else if (botResponses[category]) {
+      return getRandomResponse(category);
+    }
+  }
+  
+  return getRandomResponse('default');
+}
+
+// Helper function to get random response
+function getRandomResponse(path) {
+  const parts = path.split('.');
+  let responses = botResponses;
+  
+  for (const part of parts) {
+    responses = responses[part];
+    if (!responses) break;
+  }
+  
+  if (!Array.isArray(responses)) {
+    return "Saya ingin memahami lebih baik. Bisakah kamu menjelaskannya dengan cara lain?";
+  }
+  
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+// Enhanced chat handling with context tracking
+function handleChat() {
+  const message = userInput.value.trim();
+  if (message === '') return;
+  
+  // Add user message
+  addMessage('user', message);
+  userInput.value = '';
+  
+  // Disable input and button while bot is "thinking"
+  userInput.disabled = true;
+  document.getElementById('send-button').disabled = true;
+  document.getElementById('button-text').textContent = 'BOFAL mengetik...';
+  
+  // Simulate typing and then respond
+  simulateTyping(() => {
+    const response = generateResponse(message);
+    
+    // Split long responses into multiple messages for better readability
+    if (response.length > 160) {
+      const sentences = response.split(/(?<=[.!?])\s+/);
+      let currentMessage = '';
       
-      let width = 0;
-      const interval = setInterval(() => {
-        width += 10;
-        typingIndicator.style.width = `${width}%`;
-        
-        if (width >= 100) {
-          clearInterval(interval);
-          typingIndicator.style.width = '0%';
-          callback();
+      for (const sentence of sentences) {
+        if ((currentMessage + sentence).length > 160) {
+          addMessage('bot', currentMessage);
+          currentMessage = sentence;
+        } else {
+          currentMessage += (currentMessage ? ' ' : '') + sentence;
         }
-      }, 100);
+      }
+      
+      if (currentMessage) {
+        addMessage('bot', currentMessage);
+      }
+    } else {
+      addMessage('bot', response);
     }
+    
+    // Re-enable input and button
+    userInput.disabled = false;
+    document.getElementById('send-button').disabled = false;
+    document.getElementById('button-text').textContent = 'Kirim';
+    userInput.focus();
+  });
+}
+
+// Quick response buttons with more relevant options
+function quickResponse(message) {
+  userInput.value = message;
+  handleChat();
+}
+
+// Allow pressing Enter to send message
+userInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    handleChat();
+  }
+});
+
+// Initialize with a more engaging welcome message
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    const welcomeMessages = [
+      "Halo! Saya BOFAL, teman digitalmu di MentalGuard. Sebelum kita mulai, boleh saya tahu namamu?",
+      "Selamat datang di MentalGuard! Saya siap mendukung perjalanan kesehatan mentalmu. Boleh kenalan dulu? Namamu siapa?",
+      "Hai! Senang bertemu denganmu. Saya BOFAL. Agar lebih personal, boleh saya tahu namamu?"
+    ];
+    
+    const randomWelcome = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+    addMessage('bot', randomWelcome);
+  }, 1000);
+  
+  // Add event listener for send button
+  document.getElementById('send-button').addEventListener('click', handleChat);
+});
 
     // Function to handle chat
     function handleChat() {
@@ -166,6 +360,7 @@
       angry: '😠',
       neutral: '😐',
       anxious: '😰'
+      
     };
 
     // Mood color mapping

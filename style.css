@@ -1,21 +1,16 @@
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     
     body {
       font-family: 'Poppins', sans-serif;
       transition: background-color 0.3s ease;
     }
     
-    .mood-happy { background-color: #fef3c7; }
-    .mood-sad { background-color: #dbeafe; }
-    .mood-angry { background-color: #fee2e2; }
-    .mood-neutral { background-color: #e5e7eb; }
-    .mood-anxious { background-color: #ede9fe; }
-    
     .chat-bubble {
       max-width: 80%;
       padding: 0.75rem 1rem;
       border-radius: 1rem;
       margin-bottom: 0.5rem;
+      position: relative;
     }
     
     .user-bubble {
@@ -32,29 +27,63 @@
       border-bottom-left-radius: 0.25rem;
     }
     
-    .pulse-animation {
-      animation: pulse 2s infinite;
+    .typing-indicator {
+      display: flex;
+      padding: 8px 12px;
+      background-color: #f3f4f6;
+      border-radius: 18px;
+      width: fit-content;
+      margin-bottom: 0.5rem;
     }
     
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #9ca3af;
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: typingAnimation 1.4s infinite ease-in-out;
     }
     
-    .progress-bar {
-      height: 6px;
-      border-radius: 3px;
-      background-color: #e5e7eb;
-      overflow: hidden;
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
     }
     
-    .progress-fill {
-      height: 100%;
-      background-color: #3b82f6;
-      transition: width 0.5s ease;
+    #chat-log {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e0 #f1f1f1;
     }
     
-    #moodChart {
-      max-height: 300px;
+    #chat-log::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    #chat-log::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    #chat-log::-webkit-scrollbar-thumb {
+      background-color: #cbd5e0;
+      border-radius: 6px;
+    }
+    
+    .suggestion-chip {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .suggestion-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .message-time {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-top: 2px;
     }

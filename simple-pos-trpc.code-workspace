@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../../simple-pos-trpc"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../TOKO UMKM"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "HEALTYMENTALY"
+	}
+}

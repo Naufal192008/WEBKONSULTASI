@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Global consultation platform offering expert advice across multiple disciplines">
+    <meta name="keywords" content="consultation, expert advice, professional help, global support">
+    <title>Global Connect | World-Class Consultation Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-bg: #f9fafb;
+            --dark-bg: #111827;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+        
+        .features {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .topics {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+        
+        .topic-section {
+            margin-bottom: 4rem;
+        }
+        
+        .topic-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+        }
+        
+        .topic-section p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .topic-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .topic-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .topic-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonials {
+            padding: 5rem 0;
+            background-color: var(--light-bg);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--accent-color);
+            opacity: 0.5;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background-color: #374151;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1.5rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+        
+        /* Accessibility improvements */
+        a:focus, button:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        
+        .skip-link:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-handshake"></i>
+                <span>Global Connect</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Services</a></li>
+                    <li><a href="#topics">Resources</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" aria-label="Language selector">EN <i class="fas fa-chevron-down"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>World-Class Consultation for Global Challenges</h1>
+            <p>Access expert advice from anywhere in the world. Our network of professionals is ready to help you solve complex problems and achieve your goals.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn">Get Started</a>
+                <a href="#features" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content">
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Comprehensive Services</h2>
+                    <p>We offer a wide range of consultation services tailored to meet your specific needs across various industries and disciplines.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Business Strategy</h3>
+                        <p>Get expert guidance on business development, market expansion, and competitive strategy from industry leaders.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Health & Wellness</h3>
+                        <p>Consult with medical professionals and wellness experts for personalized health advice and treatment options.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Education Planning</h3>
+                        <p>Get customized education roadmaps from academic advisors and career counselors worldwide.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Legal Consultation</h3>
+                        <p>Access legal experts for advice on personal, business, or immigration matters across multiple jurisdictions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Environmental Solutions</h3>
+                        <p>Consult with sustainability experts to develop eco-friendly practices and green initiatives.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Technology Advisory</h3>
+                        <p>Get cutting-edge tech advice from IT specialists, software architects, and digital transformation experts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="topics" class="topics">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Knowledge Resources</h2>
+                    <p>Explore our extensive library of resources to find answers to your questions and solutions to your challenges.</p>
+                </div>
+                
+                <section id="topic1" class="topic-section">
+                    <h2>General Information</h2>
+                    <p>Essential knowledge base covering fundamental concepts across all our service areas.</p>
+                    <div class="topic-list">
+                        <div class="topic-card">
+                            <h3>Getting Started Guide</h3>
+                            <p>Learn how to make the most of our consultation services with this comprehensive introduction.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                        <div class="topic-card">
+                            <h3>Service Overviews</h3>
+                            <p>Detailed descriptions of all our consultation services and how they can benefit you.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                        <div class="topic-card">
+                            <h3>Pricing Structures</h3>
+                            <p>Transparent information about our pricing models and payment options.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="topic2" class="topic-section">
+                    <h2>Specific Queries</h2>
+                    <p>Targeted resources addressing common questions and specialized topics.</p>
+                    <div class="topic-list">
+                        <div class="topic-card">
+                            <h3>Industry-Specific Advice</h3>
+                            <p>Tailored guidance for different sectors including healthcare, technology, education, and more.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                        <div class="topic-card">
+                            <h3>Regional Considerations</h3>
+                            <p>Important factors to consider based on your geographic location and local regulations.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                        <div class="topic-card">
+                            <h3>Case Studies</h3>
+                            <p>Real-world examples of successful consultation outcomes and problem resolutions.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="topic3" class="topic-section">
+                    <h2>Expert Support</h2>
+                    <p>Connect with our team of professionals for personalized assistance.</p>
+                    <div class="topic-list">
+                        <div class="topic-card">
+                            <h3>Finding the Right Expert</h3>
+                            <p>How to identify and connect with the perfect consultant for your specific needs.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                        <div class="topic-card">
+                            <h3>Consultation Process</h3>
+                            <p>Step-by-step guide to what you can expect during your consultation journey.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                        <div class="topic-card">
+                            <h3>Follow-up Resources</h3>
+                            <p>Materials and next steps after your consultation to ensure continued success.</p>
+                            <a href="#" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read More</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Success Stories</h2>
+                    <p>Hear from individuals and organizations who have transformed their challenges into opportunities with our help.</p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            Global Connect's business consultants helped us expand into three new international markets within a year. Their strategic insights were invaluable to our growth.
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>CEO, TechForward Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            As a small business owner, I was struggling with legal compliance. The legal consultant I found through Global Connect saved me thousands in potential fines.
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <p>Owner, GreenEarth Café</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            The educational consultant helped my daughter navigate the college application process and she's now at her dream school with a full scholarship!
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Amina Diallo" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Amina Diallo</h4>
+                                <p>Parent</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Challenges into Opportunities?</h2>
+                <p>Connect with world-class experts today. Fill out the form below and we'll match you with the perfect consultant for your needs.</p>
+                
+                <div class="contact-form">
+                    <form id="consultationForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number (optional)</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Needed</label>
+                            <select id="service" class="form-control" required aria-required="true">
+                                <option value="">Select a service</option>
+                                <option value="business">Business Strategy</option>
+                                <option value="health">Health & Wellness</option>
+                                <option value="education">Education Planning</option>
+                                <option value="legal">Legal Consultation</option>
+                                <option value="environmental">Environmental Solutions</option>
+                                <option value="technology">Technology Advisory</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">How Can We Help?</label>
+                            <textarea id="message" class="form-control" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Request Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Global Connect</h3>
+                    <p>Bridging the gap between challenges and solutions through world-class consultation services.</p>
+                    <div class="social-links" style="margin-top: 1rem;">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Business Strategy</a></li>
+                        <li><a href="#">Health & Wellness</a></li>
+                        <li><a href="#">Education Planning</a></li>
+                        <li><a href="#">Legal Consultation</a></li>
+                        <li><a href="#">Environmental Solutions</a></li>
+                        <li><a href="#">Technology Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Industry Reports</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Experts</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partnerships</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Global Connect Consultation Services. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Available in 15 languages across 40 countries</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form submission handler
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, you would send this data to your server
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value
+            };
+            
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            alert('Thank you for your consultation request! Our team will contact you within 24 hours.');
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
